@@ -1,0 +1,755 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AEP.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AEPAdmin">
+          <Key>
+            <PropertyRef Name="UserAD" />
+          </Key>
+          <Property Name="UserAD" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AEPGroup">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="100" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="100" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="IsSystem" Type="bit" />
+        </EntityType>
+        <EntityType Name="AEPGroupUser">
+          <Key>
+            <PropertyRef Name="GroupDetailID" />
+          </Key>
+          <Property Name="GroupDetailID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupID" Type="bigint" Nullable="false" />
+          <Property Name="UserAD" Type="varchar" MaxLength="100" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="100" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="100" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DocAlert">
+          <Key>
+            <PropertyRef Name="Pkey" />
+          </Key>
+          <Property Name="Pkey" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocID" Type="varchar" MaxLength="20" />
+          <Property Name="AlertUserAD" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DocDownloadLog">
+          <Key>
+            <PropertyRef Name="PKey" />
+          </Key>
+          <Property Name="PKey" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DocVersion" Type="int" />
+          <Property Name="UserAD" Type="varchar" MaxLength="100" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DocHDownloadLog">
+          <Key>
+            <PropertyRef Name="PKey" />
+          </Key>
+          <Property Name="PKey" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HistoryID" Type="bigint" Nullable="false" />
+          <Property Name="UserAD" Type="varchar" MaxLength="100" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DocRecord">
+          <Key>
+            <PropertyRef Name="DocID" />
+          </Key>
+          <Property Name="DocID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DocName" Type="nvarchar" MaxLength="200" />
+          <Property Name="DocVersion" Type="int" />
+          <Property Name="PhysicalPath" Type="nvarchar(max)" />
+          <Property Name="FolderID" Type="bigint" />
+          <Property Name="DocStatus" Type="int" />
+          <Property Name="CheckInBy" Type="varchar" MaxLength="100" />
+          <Property Name="CheckInDate" Type="datetime" />
+          <Property Name="CheckOutBy" Type="varchar" MaxLength="100" />
+          <Property Name="CheckOutDate" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="100" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="DeleteBy" Type="varchar" MaxLength="100" />
+          <Property Name="DeleteDate" Type="datetime" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DocRecord_H">
+          <Key>
+            <PropertyRef Name="HistoryID" />
+          </Key>
+          <Property Name="HistoryID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DocName" Type="nvarchar" MaxLength="200" />
+          <Property Name="DocVersion" Type="int" />
+          <Property Name="PhysicalPath" Type="nvarchar" MaxLength="500" />
+          <Property Name="FolderID" Type="bigint" />
+          <Property Name="DocStatus" Type="int" />
+          <Property Name="CheckInBy" Type="varchar" MaxLength="100" />
+          <Property Name="CheckInDate" Type="datetime" />
+          <Property Name="CheckOutBy" Type="varchar" MaxLength="100" />
+          <Property Name="CheckOutDate" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="100" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="DeleteBy" Type="varchar" MaxLength="100" />
+          <Property Name="DeleteDate" Type="datetime" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DownloadLog">
+          <Key>
+            <PropertyRef Name="Pkey" />
+          </Key>
+          <Property Name="Pkey" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserAD" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DocID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DocName" Type="nvarchar" MaxLength="200" />
+          <Property Name="DocVersion" Type="int" />
+          <Property Name="DownloadTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="FolderAuth">
+          <Key>
+            <PropertyRef Name="AuthID" />
+          </Key>
+          <Property Name="AuthID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FolderID" Type="bigint" Nullable="false" />
+          <Property Name="GroupID" Type="bigint" />
+          <Property Name="UserAD" Type="varchar" MaxLength="100" />
+          <Property Name="FolderAuth" Type="int" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="100" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="100" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="FolderNode">
+          <Key>
+            <PropertyRef Name="FolderID" />
+          </Key>
+          <Property Name="FolderID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentID" Type="bigint" Nullable="false" />
+          <Property Name="FolderName" Type="nvarchar" MaxLength="100" />
+          <Property Name="FolderOwner" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="100" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="100" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="DeleteBy" Type="varchar" MaxLength="100" />
+          <Property Name="DeleteDate" Type="datetime" />
+          <Property Name="PhysicalPath" Type="nvarchar(max)" />
+          <Property Name="IsAuthInherit" Type="bit" />
+        </EntityType>
+        <EntityType Name="Mail_Log">
+          <Key>
+            <PropertyRef Name="Pkey" />
+          </Key>
+          <Property Name="Pkey" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SendFrom" Type="varchar" MaxLength="100" />
+          <Property Name="SendTo" Type="varchar" MaxLength="1000" />
+          <Property Name="SendCC" Type="varchar" MaxLength="1000" />
+          <Property Name="SendBcc" Type="varchar" MaxLength="1000" />
+          <Property Name="Subject" Type="nvarchar(max)" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="RetFlag" Type="bit" />
+          <Property Name="ErrMessage" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="MyFavorite">
+          <Key>
+            <PropertyRef Name="PKey" />
+          </Key>
+          <Property Name="PKey" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserAD" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MyColor" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_AEPGroupUser_AEPGroup">
+          <End Role="AEPGroup" Type="Self.AEPGroup" Multiplicity="1" />
+          <End Role="AEPGroupUser" Type="Self.AEPGroupUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AEPGroup">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="AEPGroupUser">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocAlert_DocRecord">
+          <End Role="DocRecord" Type="Self.DocRecord" Multiplicity="0..1" />
+          <End Role="DocAlert" Type="Self.DocAlert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocRecord">
+              <PropertyRef Name="DocID" />
+            </Principal>
+            <Dependent Role="DocAlert">
+              <PropertyRef Name="DocID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocRecord_FolderNode">
+          <End Role="FolderNode" Type="Self.FolderNode" Multiplicity="0..1" />
+          <End Role="DocRecord" Type="Self.DocRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FolderNode">
+              <PropertyRef Name="FolderID" />
+            </Principal>
+            <Dependent Role="DocRecord">
+              <PropertyRef Name="FolderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FolderAuth_AEPGroup">
+          <End Role="AEPGroup" Type="Self.AEPGroup" Multiplicity="0..1" />
+          <End Role="FolderAuth" Type="Self.FolderAuth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AEPGroup">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="FolderAuth">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FolderAuth_FolderNode">
+          <End Role="FolderNode" Type="Self.FolderNode" Multiplicity="1" />
+          <End Role="FolderAuth" Type="Self.FolderAuth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FolderNode">
+              <PropertyRef Name="FolderID" />
+            </Principal>
+            <Dependent Role="FolderAuth">
+              <PropertyRef Name="FolderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetDocID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="User" Type="varchar" Mode="In" />
+          <Parameter Name="DocID" Type="varchar" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="AEPStoreContainer">
+          <EntitySet Name="AEPAdmin" EntityType="Self.AEPAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AEPGroup" EntityType="Self.AEPGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AEPGroupUser" EntityType="Self.AEPGroupUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocAlert" EntityType="Self.DocAlert" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocDownloadLog" EntityType="Self.DocDownloadLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocHDownloadLog" EntityType="Self.DocHDownloadLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocRecord" EntityType="Self.DocRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocRecord_H" EntityType="Self.DocRecord_H" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DownloadLog" EntityType="Self.DownloadLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FolderAuth" EntityType="Self.FolderAuth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FolderNode" EntityType="Self.FolderNode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mail_Log" EntityType="Self.Mail_Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MyFavorite" EntityType="Self.MyFavorite" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AEPGroupUser_AEPGroup" Association="Self.FK_AEPGroupUser_AEPGroup">
+            <End Role="AEPGroup" EntitySet="AEPGroup" />
+            <End Role="AEPGroupUser" EntitySet="AEPGroupUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocAlert_DocRecord" Association="Self.FK_DocAlert_DocRecord">
+            <End Role="DocRecord" EntitySet="DocRecord" />
+            <End Role="DocAlert" EntitySet="DocAlert" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocRecord_FolderNode" Association="Self.FK_DocRecord_FolderNode">
+            <End Role="FolderNode" EntitySet="FolderNode" />
+            <End Role="DocRecord" EntitySet="DocRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FolderAuth_AEPGroup" Association="Self.FK_FolderAuth_AEPGroup">
+            <End Role="AEPGroup" EntitySet="AEPGroup" />
+            <End Role="FolderAuth" EntitySet="FolderAuth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FolderAuth_FolderNode" Association="Self.FK_FolderAuth_FolderNode">
+            <End Role="FolderNode" EntitySet="FolderNode" />
+            <End Role="FolderAuth" EntitySet="FolderAuth" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AEP" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AEPGroup">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AEPGroupUser" Relationship="Self.FK_AEPGroupUser_AEPGroup" FromRole="AEPGroup" ToRole="AEPGroupUser" />
+          <NavigationProperty Name="FolderAuth" Relationship="Self.FK_FolderAuth_AEPGroup" FromRole="AEPGroup" ToRole="FolderAuth" />
+          <Property Name="IsSystem" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="AEPGroupUser">
+          <Key>
+            <PropertyRef Name="GroupDetailID" />
+          </Key>
+          <Property Name="GroupDetailID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupID" Type="Int64" Nullable="false" />
+          <Property Name="UserAD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreateBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AEPGroup" Relationship="Self.FK_AEPGroupUser_AEPGroup" FromRole="AEPGroupUser" ToRole="AEPGroup" />
+        </EntityType>
+        <EntityType Name="DocAlert">
+          <Key>
+            <PropertyRef Name="Pkey" />
+          </Key>
+          <Property Name="Pkey" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AlertUserAD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DocRecord" Relationship="Self.FK_DocAlert_DocRecord" FromRole="DocAlert" ToRole="DocRecord" />
+        </EntityType>
+        <EntityType Name="DocRecord">
+          <Key>
+            <PropertyRef Name="DocID" />
+          </Key>
+          <Property Name="DocID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DocName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DocVersion" Type="Int32" />
+          <Property Name="PhysicalPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FolderID" Type="Int64" />
+          <Property Name="DocStatus" Type="Int32" />
+          <Property Name="CheckInBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CheckInDate" Type="DateTime" Precision="3" />
+          <Property Name="CheckOutBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CheckOutDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="DeleteBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DocAlert" Relationship="Self.FK_DocAlert_DocRecord" FromRole="DocRecord" ToRole="DocAlert" />
+          <NavigationProperty Name="FolderNode" Relationship="Self.FK_DocRecord_FolderNode" FromRole="DocRecord" ToRole="FolderNode" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DocRecord_H">
+          <Key>
+            <PropertyRef Name="HistoryID" />
+          </Key>
+          <Property Name="HistoryID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DocName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DocVersion" Type="Int32" />
+          <Property Name="PhysicalPath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FolderID" Type="Int64" />
+          <Property Name="DocStatus" Type="Int32" />
+          <Property Name="CheckInBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CheckInDate" Type="DateTime" Precision="3" />
+          <Property Name="CheckOutBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CheckOutDate" Type="DateTime" Precision="3" />
+          <Property Name="DeleteBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FolderAuth">
+          <Key>
+            <PropertyRef Name="AuthID" />
+          </Key>
+          <Property Name="AuthID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FolderID" Type="Int64" Nullable="false" />
+          <Property Name="GroupID" Type="Int64" />
+          <Property Name="UserAD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FolderAuth1" Type="Int32" />
+          <Property Name="CreateBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AEPGroup" Relationship="Self.FK_FolderAuth_AEPGroup" FromRole="FolderAuth" ToRole="AEPGroup" />
+          <NavigationProperty Name="FolderNode" Relationship="Self.FK_FolderAuth_FolderNode" FromRole="FolderAuth" ToRole="FolderNode" />
+        </EntityType>
+        <EntityType Name="FolderNode">
+          <Key>
+            <PropertyRef Name="FolderID" />
+          </Key>
+          <Property Name="FolderID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentID" Type="Int64" Nullable="false" />
+          <Property Name="FolderName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="CreateBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="DeleteBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DocRecord" Relationship="Self.FK_DocRecord_FolderNode" FromRole="FolderNode" ToRole="DocRecord" />
+          <NavigationProperty Name="FolderAuth" Relationship="Self.FK_FolderAuth_FolderNode" FromRole="FolderNode" ToRole="FolderAuth" />
+          <Property Name="PhysicalPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FolderOwner" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsAuthInherit" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_AEPGroupUser_AEPGroup">
+          <End Role="AEPGroup" Type="Self.AEPGroup" Multiplicity="1" />
+          <End Role="AEPGroupUser" Type="Self.AEPGroupUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AEPGroup">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="AEPGroupUser">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FolderAuth_AEPGroup">
+          <End Role="AEPGroup" Type="Self.AEPGroup" Multiplicity="0..1" />
+          <End Role="FolderAuth" Type="Self.FolderAuth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AEPGroup">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="FolderAuth">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocAlert_DocRecord">
+          <End Role="DocRecord" Type="Self.DocRecord" Multiplicity="0..1" />
+          <End Role="DocAlert" Type="Self.DocAlert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocRecord">
+              <PropertyRef Name="DocID" />
+            </Principal>
+            <Dependent Role="DocAlert">
+              <PropertyRef Name="DocID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocRecord_FolderNode">
+          <End Role="FolderNode" Type="Self.FolderNode" Multiplicity="0..1" />
+          <End Role="DocRecord" Type="Self.DocRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FolderNode">
+              <PropertyRef Name="FolderID" />
+            </Principal>
+            <Dependent Role="DocRecord">
+              <PropertyRef Name="FolderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FolderAuth_FolderNode">
+          <End Role="FolderNode" Type="Self.FolderNode" Multiplicity="1" />
+          <End Role="FolderAuth" Type="Self.FolderAuth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FolderNode">
+              <PropertyRef Name="FolderID" />
+            </Principal>
+            <Dependent Role="FolderAuth">
+              <PropertyRef Name="FolderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AEPEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AEPGroup" EntityType="Self.AEPGroup" />
+          <EntitySet Name="AEPGroupUser" EntityType="Self.AEPGroupUser" />
+          <EntitySet Name="DocAlert" EntityType="Self.DocAlert" />
+          <EntitySet Name="DocRecord" EntityType="Self.DocRecord" />
+          <EntitySet Name="DocRecord_H" EntityType="Self.DocRecord_H" />
+          <EntitySet Name="FolderAuth" EntityType="Self.FolderAuth" />
+          <EntitySet Name="FolderNode" EntityType="Self.FolderNode" />
+          <AssociationSet Name="FK_AEPGroupUser_AEPGroup" Association="Self.FK_AEPGroupUser_AEPGroup">
+            <End Role="AEPGroup" EntitySet="AEPGroup" />
+            <End Role="AEPGroupUser" EntitySet="AEPGroupUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FolderAuth_AEPGroup" Association="Self.FK_FolderAuth_AEPGroup">
+            <End Role="AEPGroup" EntitySet="AEPGroup" />
+            <End Role="FolderAuth" EntitySet="FolderAuth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocAlert_DocRecord" Association="Self.FK_DocAlert_DocRecord">
+            <End Role="DocRecord" EntitySet="DocRecord" />
+            <End Role="DocAlert" EntitySet="DocAlert" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocRecord_FolderNode" Association="Self.FK_DocRecord_FolderNode">
+            <End Role="FolderNode" EntitySet="FolderNode" />
+            <End Role="DocRecord" EntitySet="DocRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FolderAuth_FolderNode" Association="Self.FK_FolderAuth_FolderNode">
+            <End Role="FolderNode" EntitySet="FolderNode" />
+            <End Role="FolderAuth" EntitySet="FolderAuth" />
+          </AssociationSet>
+          <FunctionImport Name="GetDocID">
+            <Parameter Name="User" Mode="In" Type="String" />
+            <Parameter Name="DocID" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="AEPAdmin" EntityType="AEP.AEPAdmin" />
+          <EntitySet Name="DocDownloadLog" EntityType="AEP.DocDownloadLog" />
+          <EntitySet Name="Mail_Log" EntityType="AEP.Mail_Log" />
+          <EntitySet Name="DocHDownloadLog" EntityType="AEP.DocHDownloadLog" />
+          <EntitySet Name="DownloadLog" EntityType="AEP.DownloadLog" />
+          <EntitySet Name="MyFavorite" EntityType="AEP.MyFavorite" />
+        </EntityContainer>
+        <EntityType Name="AEPAdmin">
+          <Key>
+            <PropertyRef Name="UserAD" />
+          </Key>
+          <Property Name="UserAD" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DocDownloadLog">
+          <Key>
+            <PropertyRef Name="PKey" />
+          </Key>
+          <Property Name="PKey" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DocVersion" Type="Int32" />
+          <Property Name="UserAD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Mail_Log">
+          <Key>
+            <PropertyRef Name="Pkey" />
+          </Key>
+          <Property Name="Pkey" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SendFrom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SendTo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="SendCC" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="SendBcc" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RetFlag" Type="Boolean" />
+          <Property Name="ErrMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DocHDownloadLog">
+          <Key>
+            <PropertyRef Name="PKey" />
+          </Key>
+          <Property Name="PKey" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HistoryID" Type="Int64" Nullable="false" />
+          <Property Name="UserAD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DownloadLog">
+          <Key>
+            <PropertyRef Name="Pkey" />
+          </Key>
+          <Property Name="Pkey" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserAD" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DocID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DocName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DocVersion" Type="Int32" />
+          <Property Name="DownloadTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="MyFavorite">
+          <Key>
+            <PropertyRef Name="PKey" />
+          </Key>
+          <Property Name="PKey" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserAD" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MyColor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AEPStoreContainer" CdmEntityContainer="AEPEntities">
+          <EntitySetMapping Name="AEPGroup">
+            <EntityTypeMapping TypeName="AEP.AEPGroup">
+              <MappingFragment StoreEntitySet="AEPGroup">
+                <ScalarProperty Name="IsSystem" ColumnName="IsSystem" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AEPGroupUser">
+            <EntityTypeMapping TypeName="AEP.AEPGroupUser">
+              <MappingFragment StoreEntitySet="AEPGroupUser">
+                <ScalarProperty Name="GroupDetailID" ColumnName="GroupDetailID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="UserAD" ColumnName="UserAD" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocAlert">
+            <EntityTypeMapping TypeName="AEP.DocAlert">
+              <MappingFragment StoreEntitySet="DocAlert">
+                <ScalarProperty Name="Pkey" ColumnName="Pkey" />
+                <ScalarProperty Name="DocID" ColumnName="DocID" />
+                <ScalarProperty Name="AlertUserAD" ColumnName="AlertUserAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocRecord">
+            <EntityTypeMapping TypeName="AEP.DocRecord">
+              <MappingFragment StoreEntitySet="DocRecord">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="DocID" ColumnName="DocID" />
+                <ScalarProperty Name="DocName" ColumnName="DocName" />
+                <ScalarProperty Name="DocVersion" ColumnName="DocVersion" />
+                <ScalarProperty Name="PhysicalPath" ColumnName="PhysicalPath" />
+                <ScalarProperty Name="FolderID" ColumnName="FolderID" />
+                <ScalarProperty Name="DocStatus" ColumnName="DocStatus" />
+                <ScalarProperty Name="CheckInBy" ColumnName="CheckInBy" />
+                <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+                <ScalarProperty Name="CheckOutBy" ColumnName="CheckOutBy" />
+                <ScalarProperty Name="CheckOutDate" ColumnName="CheckOutDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="DeleteBy" ColumnName="DeleteBy" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocRecord_H">
+            <EntityTypeMapping TypeName="AEP.DocRecord_H">
+              <MappingFragment StoreEntitySet="DocRecord_H">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
+                <ScalarProperty Name="DocID" ColumnName="DocID" />
+                <ScalarProperty Name="DocName" ColumnName="DocName" />
+                <ScalarProperty Name="DocVersion" ColumnName="DocVersion" />
+                <ScalarProperty Name="PhysicalPath" ColumnName="PhysicalPath" />
+                <ScalarProperty Name="FolderID" ColumnName="FolderID" />
+                <ScalarProperty Name="DocStatus" ColumnName="DocStatus" />
+                <ScalarProperty Name="CheckInBy" ColumnName="CheckInBy" />
+                <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+                <ScalarProperty Name="CheckOutBy" ColumnName="CheckOutBy" />
+                <ScalarProperty Name="CheckOutDate" ColumnName="CheckOutDate" />
+                <ScalarProperty Name="DeleteBy" ColumnName="DeleteBy" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FolderAuth">
+            <EntityTypeMapping TypeName="AEP.FolderAuth">
+              <MappingFragment StoreEntitySet="FolderAuth">
+                <ScalarProperty Name="AuthID" ColumnName="AuthID" />
+                <ScalarProperty Name="FolderID" ColumnName="FolderID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="UserAD" ColumnName="UserAD" />
+                <ScalarProperty Name="FolderAuth1" ColumnName="FolderAuth" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FolderNode">
+            <EntityTypeMapping TypeName="AEP.FolderNode">
+              <MappingFragment StoreEntitySet="FolderNode">
+                <ScalarProperty Name="IsAuthInherit" ColumnName="IsAuthInherit" />
+                <ScalarProperty Name="FolderOwner" ColumnName="FolderOwner" />
+                <ScalarProperty Name="PhysicalPath" ColumnName="PhysicalPath" />
+                <ScalarProperty Name="FolderID" ColumnName="FolderID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="FolderName" ColumnName="FolderName" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="DeleteBy" ColumnName="DeleteBy" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetDocID" FunctionName="AEP.Store.GetDocID" />
+          <EntitySetMapping Name="AEPAdmin">
+            <EntityTypeMapping TypeName="AEP.AEPAdmin">
+              <MappingFragment StoreEntitySet="AEPAdmin">
+                <ScalarProperty Name="UserAD" ColumnName="UserAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocDownloadLog">
+            <EntityTypeMapping TypeName="AEP.DocDownloadLog">
+              <MappingFragment StoreEntitySet="DocDownloadLog">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UserAD" ColumnName="UserAD" />
+                <ScalarProperty Name="DocVersion" ColumnName="DocVersion" />
+                <ScalarProperty Name="DocID" ColumnName="DocID" />
+                <ScalarProperty Name="PKey" ColumnName="PKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mail_Log">
+            <EntityTypeMapping TypeName="AEP.Mail_Log">
+              <MappingFragment StoreEntitySet="Mail_Log">
+                <ScalarProperty Name="ErrMessage" ColumnName="ErrMessage" />
+                <ScalarProperty Name="RetFlag" ColumnName="RetFlag" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="SendBcc" ColumnName="SendBcc" />
+                <ScalarProperty Name="SendCC" ColumnName="SendCC" />
+                <ScalarProperty Name="SendTo" ColumnName="SendTo" />
+                <ScalarProperty Name="SendFrom" ColumnName="SendFrom" />
+                <ScalarProperty Name="Pkey" ColumnName="Pkey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocHDownloadLog">
+            <EntityTypeMapping TypeName="AEP.DocHDownloadLog">
+              <MappingFragment StoreEntitySet="DocHDownloadLog">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UserAD" ColumnName="UserAD" />
+                <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
+                <ScalarProperty Name="PKey" ColumnName="PKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DownloadLog">
+            <EntityTypeMapping TypeName="AEP.DownloadLog">
+              <MappingFragment StoreEntitySet="DownloadLog">
+                <ScalarProperty Name="DownloadTime" ColumnName="DownloadTime" />
+                <ScalarProperty Name="DocVersion" ColumnName="DocVersion" />
+                <ScalarProperty Name="DocName" ColumnName="DocName" />
+                <ScalarProperty Name="DocID" ColumnName="DocID" />
+                <ScalarProperty Name="UserAD" ColumnName="UserAD" />
+                <ScalarProperty Name="Pkey" ColumnName="Pkey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MyFavorite">
+            <EntityTypeMapping TypeName="AEP.MyFavorite">
+              <MappingFragment StoreEntitySet="MyFavorite">
+                <ScalarProperty Name="MyColor" ColumnName="MyColor" />
+                <ScalarProperty Name="UserAD" ColumnName="UserAD" />
+                <ScalarProperty Name="PKey" ColumnName="PKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

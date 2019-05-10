@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AEP.WebAPI", "AEP.WebAPI\AEP.WebAPI.csproj", "{FEDF51BB-F3A6-41C3-9179-1F4D7FBCFEF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AEP.BusinessServices", "AEP.BusinessServices\AEP.BusinessServices.csproj", "{2CD8E8B2-967C-484F-8AE2-DDFFA5D23143}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AEP.DataModel", "AEP.DataModel\AEP.DataModel.csproj", "{6D3AB9FC-D4B2-4D4E-8DFC-6DAE2F75BB81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AEP.BusinessEntities", "AEP.BusinessEntities\AEP.BusinessEntities.csproj", "{BCD9636F-A95E-4381-B98E-1F2D61333EB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AEP.DataMigration", "AEP.DataMigration\AEP.DataMigration.csproj", "{A6C9F779-E0CC-4D18-9DB5-751C1477BE98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AEP.Job", "AEP.Job\AEP.Job.csproj", "{803AAED0-EFE2-4E69-8224-CED10188A52F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AEP.MailServer", "AEP.MailServer\AEP.MailServer.csproj", "{BA460FB1-E9E9-4E9D-AB6C-F1E30DC5FDD6}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tpetfs01:8080/tfs/mm
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = AEP.BusinessEntities\\AEP.BusinessEntities.csproj
+		SccProjectName1 = AEP.BusinessEntities
+		SccLocalPath1 = AEP.BusinessEntities
+		SccProjectUniqueName2 = AEP.BusinessServices\\AEP.BusinessServices.csproj
+		SccProjectName2 = AEP.BusinessServices
+		SccLocalPath2 = AEP.BusinessServices
+		SccProjectUniqueName3 = AEP.DataModel\\AEP.DataModel.csproj
+		SccProjectName3 = AEP.DataModel
+		SccLocalPath3 = AEP.DataModel
+		SccProjectUniqueName4 = AEP.WebAPI\\AEP.WebAPI.csproj
+		SccProjectName4 = AEP.WebAPI
+		SccLocalPath4 = AEP.WebAPI
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FEDF51BB-F3A6-41C3-9179-1F4D7FBCFEF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEDF51BB-F3A6-41C3-9179-1F4D7FBCFEF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEDF51BB-F3A6-41C3-9179-1F4D7FBCFEF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEDF51BB-F3A6-41C3-9179-1F4D7FBCFEF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CD8E8B2-967C-484F-8AE2-DDFFA5D23143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CD8E8B2-967C-484F-8AE2-DDFFA5D23143}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CD8E8B2-967C-484F-8AE2-DDFFA5D23143}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CD8E8B2-967C-484F-8AE2-DDFFA5D23143}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D3AB9FC-D4B2-4D4E-8DFC-6DAE2F75BB81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D3AB9FC-D4B2-4D4E-8DFC-6DAE2F75BB81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D3AB9FC-D4B2-4D4E-8DFC-6DAE2F75BB81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D3AB9FC-D4B2-4D4E-8DFC-6DAE2F75BB81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCD9636F-A95E-4381-B98E-1F2D61333EB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCD9636F-A95E-4381-B98E-1F2D61333EB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCD9636F-A95E-4381-B98E-1F2D61333EB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCD9636F-A95E-4381-B98E-1F2D61333EB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6C9F779-E0CC-4D18-9DB5-751C1477BE98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6C9F779-E0CC-4D18-9DB5-751C1477BE98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6C9F779-E0CC-4D18-9DB5-751C1477BE98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6C9F779-E0CC-4D18-9DB5-751C1477BE98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{803AAED0-EFE2-4E69-8224-CED10188A52F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{803AAED0-EFE2-4E69-8224-CED10188A52F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{803AAED0-EFE2-4E69-8224-CED10188A52F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{803AAED0-EFE2-4E69-8224-CED10188A52F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA460FB1-E9E9-4E9D-AB6C-F1E30DC5FDD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA460FB1-E9E9-4E9D-AB6C-F1E30DC5FDD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA460FB1-E9E9-4E9D-AB6C-F1E30DC5FDD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA460FB1-E9E9-4E9D-AB6C-F1E30DC5FDD6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
